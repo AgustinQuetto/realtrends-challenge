@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": false,
+    "lib": ["es2017"],
     "skipLibCheck": false,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,

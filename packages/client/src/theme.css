@@ -4,11 +4,12 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: whitesmoke;
 }
 
 #root {
@@ -24,4 +25,35 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+button {
+  margin: 1rem;
+  background-color: rgb(56, 70, 201);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 3px;
+}
+
+button:hover {
+  background-color: rgb(29, 46, 194);
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 50%;
+  background-color: #333;
+  user-select: none;
+  cursor: not-allowed;
+}
+button.danger {
+  background-color: rgb(201, 56, 56);
+}
+button.success {
+  background-color: rgb(68, 201, 56);
 }

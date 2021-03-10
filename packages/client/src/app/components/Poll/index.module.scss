@@ -1,0 +1,63 @@
+.poll {
+  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  .card {
+    margin: 0.5rem;
+    max-width: 320px;
+    background: linear-gradient(to top, var(--linearColor) var(--linearPercentage), transparent 0);
+    transition: background 1s ease-in;
+    -webkit-transition: background 1s ease-in;
+    .innerCard {
+      background-color: white;
+      width: 90%;
+      margin-left: 5%;
+      margin-bottom: 15px;
+      padding: 1rem;
+      figure {
+        width: 256px;
+        height: 256px;
+        display: flex;
+        align-items: center;
+        margin: 0px;
+        img {
+          width:256px;
+          height: auto;
+          max-height: 256px;
+        }
+      }
+      .valorations {
+        border: 1px solid black;
+        border-radius: 3px;
+        height: 200px;
+        overflow-y: auto;
+        text-align: left;
+        div {
+          padding: 5px;
+        }
+      }
+    }
+  }
+}
+
+.tooltip {
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  margin-top: -5px;
+  margin-left: 5px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

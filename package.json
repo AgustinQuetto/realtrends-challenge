@@ -5,9 +5,14 @@
   "license": "MIT",
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "dev": "lerna run dev --parallel --stream"
+    "dev": "lerna run dev --parallel --stream",
+    "kill": "kill $(lsof -ti:3000,5000)"
   },
   "devDependencies": {
     "lerna": "^3.22.1"
+  },
+  "dependencies": {
+    "dayjs": "^1.10.4",
+    "tmi.js": "^1.7.5"
   }
 }
