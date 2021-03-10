@@ -6,8 +6,10 @@
   .card {
     margin: 0.5rem;
     max-width: 320px;
-    background: linear-gradient(to top, var(--linearColor) var(--linearPercentage), transparent 0);
+    background: linear-gradient(to top, var(--linearColor) var(--linearPercentage), transparent 0) whitesmoke;
     transition: background 1s ease-in;
+    border: 1px solid black;
+    border-radius: 10px;
     -webkit-transition: background 1s ease-in;
     .innerCard {
       background-color: white;
