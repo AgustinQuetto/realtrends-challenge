@@ -4,6 +4,10 @@ interface PollObject {
   [key: string]: any;
 }
 
+interface ReferencesObject {
+  [key: string]: any;
+}
+
 class PollController {
   [x: string]: any;
   twitch: any;
@@ -14,6 +18,27 @@ class PollController {
     this.twitch = false;
     this.server = server;
     this.polls = {};
+  }
+
+  numToSSColumn(num: number) {
+    let s: string = "",
+      t: any;
+
+    while (num > 0) {
+      t = (num - 1) % 26;
+      s = String.fromCharCode(65 + t) + s;
+      num = ((num - t) / 26) | 0;
+    }
+    return s || "";
+  }
+
+  SSColumnToNum(str: string) {
+    let out = 0;
+    let len = str.length;
+    for (let pos = 0; pos < len; pos++) {
+      out += (str.charCodeAt(pos) - 64) * Math.pow(26, len - pos - 1);
+    }
+    return out;
   }
 
   start() {
@@ -40,10 +65,20 @@ class PollController {
         delete entryOptions[id];
       }
     });
+
+    const mergedOptions = {...options, ...entryOptions};
+    const references: ReferencesObject = {};
+    Object.keys(mergedOptions).map((k, i) => {
+      const letter = this.numToSSColumn(i + 1);
+      if (!letter) return;
+      references[letter] = k;
+      mergedOptions[k].reference = letter;
+    });
     this.polls[channel] = {
       status: status,
       total: total,
-      options: {...options, ...entryOptions},
+      options: mergedOptions,
+      references,
     };
     this.updateClientPoll(channel);
   }
@@ -66,7 +101,8 @@ class PollController {
 
   status(channel: string) {
     const status = this.polls[channel].status;
-    this.polls[channel].status = status === "open" ? "closed" : "open";
+    const newStatus = status === "open" ? "closed" : "open";
+    this.polls[channel].status = newStatus;
     this.updateClientPoll(channel);
   }
 
@@ -89,20 +125,23 @@ class PollController {
         switch (type) {
           case "VOTE":
             let nonExistingVote = true;
-            Object.keys(this.polls[channel].options).map((optionId) => {
-              if (this.polls[channel].options[optionId].valorations[username]) {
+            const poll = this.polls[channel];
+            id = poll.references[id] || id;
+            Object.keys(poll.options).map((optionId) => {
+              if (poll.options[optionId].valorations[username]) {
                 nonExistingVote = false;
-                this.polls[channel].options[optionId].count--;
-                delete this.polls[channel].options[optionId].valorations[username];
+                poll.options[optionId].count--;
+                delete poll.options[optionId].valorations[username];
               }
             });
-            if (!this.polls[channel].options[id]) return;
-            this.polls[channel].options[id].valorations[username] = {
+            if (!poll.options[id]) return;
+            poll.options[id].valorations[username] = {
               message: valoration || "",
               timestamp: +new Date(),
             };
-            this.polls[channel].options[id].count++;
-            if (nonExistingVote) this.polls[channel].total++;
+            poll.options[id].count++;
+            if (nonExistingVote) poll.total++;
+            this.polls[channel] = poll;
             this.updateClientPoll(channel);
             break;
           default:

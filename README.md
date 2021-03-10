@@ -33,14 +33,17 @@ npm run bootstrap
 npm run dev
 ```
 
-## Consideraciones
+## Aclaraciones personales
 * Es posible crear múltiples votaciones con límite de una por usuario.
-* Para crear una votación perteneciente a un canal se debe entrar al path `/username`
+* Para crear una votación perteneciente a un canal de forma directa se debe entrar al path `/username` o completando el usuario `/`.
 * Las votaciones se realizan desde el canal de Twitch.tv perteneciente al usuario.
 * Para iniciar una votación se deben haber seleccionado mínimo 2 elementos.
-* El comando para la votación es `!VOTE MELI_PRODUCT_ID MENSJAE DE OPINIÓN`
+* El comando para la votación es `!VOTE LETRA_ASIGNADA_O_MELI_PRODUCT_ID MENSJAE DE OPINIÓN`
 * Se pueden añadir y eliminar elementos de la votación en tiempo real.
 * Eliminados todos los elementos, la encuesta es eliminada.
 * `server/src/controllers/PollController.ts` contiene el manager encargado de la gestión de las encuestas y escucha de comandos.
+* Se desarrolló utilizando objetos y claves, para realizar la menor cantidad de iteraciones y búsquedas posibles en el servidor.
+* La escucha al canal de Twitch comienza cuando se activa una encuesta.
+* Los comandos son detectados y extraídos utilizando RegEx. Se puede extender a otras funcionabilidades parametrizadas.
 
 En honor a Gonzy y su pasión por TypeScript y piedad por errores de tipado en React 🤓.

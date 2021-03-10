@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import styles from "./index.module.scss";
+import styles from "./Poll.module.scss";
 import Item from "./Item";
 
 const Poll: React.FC = ({poll, remove}) => (

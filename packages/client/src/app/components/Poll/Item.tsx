@@ -1,7 +1,7 @@
 import * as React from "react";
 import dayjs from "dayjs";
 
-import styles from "./index.module.scss";
+import styles from "./Poll.module.scss";
 
 const getPercentage = (x, y) => {
   let result = 0;
@@ -35,7 +35,8 @@ const Item: React.FC = ({id, item, total, remove}) => {
       }}
     >
       <h3>{item.title}</h3>
-      <h5>ID: {id}</h5>
+      <h1>{item.reference}</h1>
+      <h5>{id}</h5>
       <h4>{percentage}%</h4>
       <div className={styles.innerCard}>
         <div className={styles.progress} />
@@ -48,7 +49,7 @@ const Item: React.FC = ({id, item, total, remove}) => {
           {Object.entries(item.valorations).map(([username, valoration]) =>
             valoration ? (
               <div key={`username_${username}`} className={styles.tooltip}>
-                {username}: {valoration.message}
+                <b>{username}:</b> {valoration.message}
                 <span className={styles.tooltiptext}>
                   {dayjs(valoration.timestamp).format("DD/MM/YYYY HH:mm")}
                 </span>
