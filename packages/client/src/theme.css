@@ -21,10 +21,24 @@ body {
   align-items: center;
   justify-content: center;
   color: #333;
+  width: 100%;
 }
 
 * {
   box-sizing: border-box;
+}
+
+input {
+  width: 100%;
+  min-width: 0px;
+  max-width: 500px;
+  border-radius: 5px;
+  height: 35px;
+  margin: 20px;
+}
+
+form,input {
+  margin-left: 0px;
 }
 
 button {

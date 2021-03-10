@@ -1,9 +1,9 @@
 import React, {FC, useEffect, useState, ChangeEvent} from "react";
 import SocketIO from "socket.io-client";
 
+import RealTrends from "~/app/components/RealTrends";
 import Modal from "~/app/components/Modal";
 import Poll from "~/app/components/Poll";
-import logo from "~/assets/logo.svg";
 
 import styles from "./Home.module.scss";
 
@@ -75,15 +75,35 @@ const Home: FC = () => {
     socket.emit("remove-item", id);
   };
 
+  const login = (e) => {
+    e.preventDefault();
+    const username = e.target[0].value;
+
+    location.replace(username);
+  };
+
   const isOpen = poll.status == "open";
+
+  if (!username)
+    return (
+      <div className={styles.container}>
+        <RealTrends />
+        <form onSubmit={login}>
+          <input
+            autoFocus
+            name="username"
+            placeholder="Ingresa tu nombre de usuario de Twitch.tv"
+            onChange={search}
+          />
+          <button type="submit">Continuar</button>
+        </form>
+      </div>
+    );
 
   return (
     <main className={styles.container}>
       <header className={styles.header}>
-        <h1>
-          <img alt="RealTrends" src={logo} width={180} />
-        </h1>
-        <h3>Lets get this party started</h3>
+        <RealTrends />
         <button onClick={() => setModal(!modal)}>Añadir artículos</button>
         {poll.status && (
           <button className={isOpen ? "danger" : "success"} onClick={() => changeStatus()}>
@@ -93,7 +113,7 @@ const Home: FC = () => {
       </header>
       <div>Votación {status[poll.status] || "pendiente"}</div>
       {poll.status == "closed" && <div>Debes reanudar para recibir nuevos votos.</div>}
-      <Poll poll={poll} remove={(id) => removeItem(id)} />
+      <Poll poll={poll} remove={(id: string) => removeItem(id)} />
 
       <Modal enabled={modal} setModal={() => setModal(!modal)}>
         <>

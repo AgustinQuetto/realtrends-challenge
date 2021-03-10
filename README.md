@@ -33,7 +33,6 @@ npm run bootstrap
 npm run dev
 ```
 
-
 ## Consideraciones
 * Es posible crear múltiples votaciones con límite de una por usuario.
 * Para crear una votación perteneciente a un canal se debe entrar al path `/username`
@@ -43,3 +42,5 @@ npm run dev
 * Se pueden añadir y eliminar elementos de la votación en tiempo real.
 * Eliminados todos los elementos, la encuesta es eliminada.
 * `server/src/controllers/PollController.ts` contiene el manager encargado de la gestión de las encuestas y escucha de comandos.
+
+En honor a Gonzy y su pasión por TypeScript y piedad por errores de tipado en React 🤓.

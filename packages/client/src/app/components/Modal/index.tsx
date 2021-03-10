@@ -2,7 +2,13 @@ import * as React from "react";
 
 import styles from "./index.module.scss";
 
-const Modal: React.FC = ({enabled, setModal, children}) =>
+interface ModalProps {
+  enabled: boolean;
+  setModal: () => void;
+  children: React.ReactNode;
+}
+
+const Modal: React.FC = ({enabled, setModal, children}: ModalProps) =>
   enabled ? <section className={styles.modal}>{children}</section> : null;
 
 export default Modal;
