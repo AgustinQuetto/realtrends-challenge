@@ -45,5 +45,5 @@ npm run dev
 * Se desarrolló utilizando objetos y claves, para realizar la menor cantidad de iteraciones y búsquedas posibles en el servidor.
 * La escucha al canal de Twitch comienza cuando se activa una encuesta.
 * Los comandos son detectados y extraídos utilizando RegEx. Se puede extender a otras funcionabilidades parametrizadas.
-
+* Por cada canal se asigna a un room de key `channel`. Se puede gestionar `la misma votación del canal` desde pestañas o ubicaciones distintas, mientras otros canales tienen las suyas propias.
 En honor a Gonzy y su pasión por TypeScript y piedad por errores de tipado en React 🤓.
