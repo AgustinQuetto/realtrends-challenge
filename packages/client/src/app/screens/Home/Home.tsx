@@ -11,7 +11,7 @@ const socket = SocketIO.io("http://localhost:5000");
 
 const status = {
   open: "en curso",
-  closed: "cerrada",
+  closed: "pausada",
 };
 
 const Home: FC = () => {
@@ -74,6 +74,10 @@ const Home: FC = () => {
     socket.emit("remove-item", id);
   };
 
+  const reset = () => {
+    socket.emit("reset");
+  };
+
   const login = (e) => {
     e.preventDefault();
     const username = e.target[0].value;
@@ -111,12 +115,18 @@ const Home: FC = () => {
         <RealTrends />
         <button onClick={() => setModal(!modal)}>Añadir artículos</button>
         {poll.status && (
-          <button className={isOpen ? "danger" : "success"} onClick={() => changeStatus()}>
-            {isOpen ? "Cerrar" : "Reanudar"} votación
-          </button>
+          <>
+            <button className={isOpen ? "warning" : "success"} onClick={changeStatus}>
+              {isOpen ? "Pausar" : "Reanudar"}
+            </button>
+            <button className="danger" onClick={reset}>
+              Reiniciar
+            </button>
+          </>
         )}
       </header>
       <div>Votación {status[poll.status] || "pendiente"}</div>
+      {poll.status && <div>Total: {poll.total || 0}</div>}
       {poll.status == "closed" && <div>Debes reanudar para recibir nuevos votos.</div>}
       <Poll poll={poll} remove={(id: string) => removeItem(id)} />
 

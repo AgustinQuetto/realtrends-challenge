@@ -68,6 +68,9 @@ button:disabled {
 button.danger {
   background-color: rgb(201, 56, 56);
 }
+button.warning {
+  background-color: rgb(201, 150, 56);
+}
 button.success {
   background-color: rgb(68, 201, 56);
 }

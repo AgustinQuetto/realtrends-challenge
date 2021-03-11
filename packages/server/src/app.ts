@@ -46,6 +46,11 @@ server.on("connection", (socket) => {
     PollsInstance.removeItem(channel, id);
   });
 
+  //elimina la votación
+  socket.on("reset", () => {
+    PollsInstance.reset(channel);
+  });
+
   socket.on("set-poll", (data: any) => {
     if (!channel) return;
     const currentChannels = PollsInstance.twitch.getChannels();

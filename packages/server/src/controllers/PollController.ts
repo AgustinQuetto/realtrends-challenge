@@ -119,7 +119,7 @@ class PollController {
 
   //envía al canal del socket un evento actualizando la votación
   updateClientPoll(channel: string) {
-    this.server.to(channel).emit("poll-data", this.polls[channel]);
+    this.server.to(channel).emit("poll-data", this.polls[channel] || {});
   }
 
   //alterna el estado de la votación permitiendo o no votar
@@ -127,6 +127,11 @@ class PollController {
     const status = this.polls[channel].status;
     const newStatus = status === "open" ? "closed" : "open";
     this.polls[channel].status = newStatus;
+    this.updateClientPoll(channel);
+  }
+
+  reset(channel: string) {
+    delete this.polls[channel];
     this.updateClientPoll(channel);
   }
 
