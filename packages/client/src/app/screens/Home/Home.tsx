@@ -50,6 +50,14 @@ const Home: FC = () => {
     setProducts(results);
   };
 
+  let inDebounce: any;
+  const debounce = (delay: number, fn: () => null) => {
+    return (args) => {
+      clearTimeout(inDebounce);
+      inDebounce = setTimeout(() => fn(args), delay);
+    };
+  };
+
   const selectProduct = (item: any) => {
     const {id} = item;
     const tmpItem = {...item};
@@ -132,7 +140,12 @@ const Home: FC = () => {
 
       <Modal enabled={modal} setModal={() => setModal(!modal)}>
         <>
-          <input autoFocus onChange={search} />
+          <input
+            autoFocus
+            onChange={(e) => {
+              debounce(200, search)(e);
+            }}
+          />
           <button
             className="success"
             disabled={Object.keys(selected).length < 2}
