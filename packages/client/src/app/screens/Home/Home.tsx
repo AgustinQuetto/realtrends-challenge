@@ -25,6 +25,7 @@ const Home: FC = () => {
     socket.on("get-username", () => socket.emit("set-username", username));
     socket.on("poll-data", (data: any) => {
       setPoll({...data});
+      setSelected({...data.options});
     });
   }, []);
 
