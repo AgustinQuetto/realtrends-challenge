@@ -36,9 +36,7 @@ const Home: FC = () => {
   }, [modal]);
 
   const createPoll = () => {
-    const data = selected;
-
-    socket.emit("set-poll", data);
+    if (Object.keys(selected).length) socket.emit("set-poll", selected);
   };
 
   const search = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -80,6 +78,12 @@ const Home: FC = () => {
     const username = e.target[0].value;
 
     location.replace(username);
+  };
+
+  const close = () => {
+    setSelected({});
+    setProducts([]);
+    setModal(false);
   };
 
   const isOpen = poll.status == "open";
@@ -125,6 +129,7 @@ const Home: FC = () => {
           >
             Confirmar
           </button>
+          <button onClick={close}>Cerrar</button>
           <div className={styles.grid}>
             {products.map((item, i) =>
               !poll?.options?.[item.id] ? (
