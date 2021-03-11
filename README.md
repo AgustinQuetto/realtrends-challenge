@@ -46,6 +46,7 @@ npm run dev
 * La escucha al canal de Twitch comienza cuando se activa una encuesta.
 * Los comandos son detectados y extraídos utilizando RegEx. Se puede extender a otras funcionabilidades parametrizadas.
 * Por cada canal se asigna a un room de key `channel`. Se puede gestionar `la misma votación del canal` desde pestañas o ubicaciones distintas, mientras otros canales tienen las suyas propias.
+* Una vez creada una opción, la asignación de letra no es reutilizable. Esto se hizo para prevenir "votos" de elementos erróneos del usuario creyendo que pertenecía a una opción anterior. Al llegar a la Z, se genera un id AA consecutivamente.
 
 En honor a Gonzy y su pasión por TypeScript y piedad por errores de tipado en React 🤓.
 
